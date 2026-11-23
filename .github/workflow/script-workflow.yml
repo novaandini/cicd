@@ -1,0 +1,26 @@
+name: Script Workflow (Lint, Security, Test, Env)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: read
+      security-events: write
+    env:
+      REQUIRED_VAR: "workflow_value"
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+      - name: Ensure script is executeable
+        run: chmod +x scripts/my-script.sh
+      # linting stage
+      - name: Install ShellCheck (Linter)
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Run ShellCheck on the script
