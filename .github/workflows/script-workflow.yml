@@ -3,7 +3,7 @@ name: Script Workflow (Lint, Security, Test, Env)
 on:
   push:
     branches: [ main ]
-  pull-request:
+  pull_request:
     branches: [ main ]
 
 jobs:
